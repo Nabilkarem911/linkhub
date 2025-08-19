@@ -382,10 +382,11 @@ class LinkInBioTester:
             request_data = data[0] if data else None
             
             try:
+                url = f"http://localhost:3000/api{endpoint}"
                 if method == "GET":
-                    response = unauth_session.get(f"{API_BASE}{endpoint}")
+                    response = unauth_session.get(url, timeout=10)
                 elif method == "POST":
-                    response = unauth_session.post(f"{API_BASE}{endpoint}", json=request_data)
+                    response = unauth_session.post(url, json=request_data, timeout=10)
                 
                 if response and response.status_code == 401:
                     self.log_result(f"Auth Protection - {method} {endpoint}", True, "Correctly rejected unauthenticated request")
