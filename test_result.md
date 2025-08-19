@@ -170,6 +170,9 @@ backend:
       - working: false
         agent: "testing"
         comment: "CRITICAL: All link endpoints fail due to missing 'links' table in Supabase database. Authentication protection works correctly (returns 401 for unauthenticated requests)."
+      - working: false
+        agent: "testing"
+        comment: "PROGRESS: Database schema exists! Authentication protection works correctly (returns 401 for unauthenticated requests). Link endpoints are properly protected but cannot be fully tested until RLS policies allow profile creation and user authentication flow is complete."
 
   - task: "Public Profile API"
     implemented: true
