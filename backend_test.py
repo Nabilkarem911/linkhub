@@ -19,7 +19,7 @@ class LinkInBioTester:
     def __init__(self):
         self.session = requests.Session()
         self.test_user_data = {
-            "email": f"testuser_{uuid.uuid4().hex[:8]}@example.com",
+            "email": f"testuser{uuid.uuid4().hex[:8]}@gmail.com",
             "password": "TestPassword123!",
             "username": f"testuser{uuid.uuid4().hex[:8]}",
             "displayName": "Test User Display"
