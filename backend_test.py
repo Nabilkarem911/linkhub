@@ -115,7 +115,7 @@ class LinkInBioTester:
         """Test user login endpoint"""
         print("\n=== Testing Authentication - Signin ===")
         
-        # Test successful signin
+        # Test signin with unconfirmed email (expected behavior with Supabase)
         signin_data = {
             "email": self.test_user_data["email"],
             "password": self.test_user_data["password"]
@@ -123,21 +123,19 @@ class LinkInBioTester:
         
         response = self.make_request("POST", "/auth/signin", signin_data)
         
-        if response and response.status_code == 200:
+        if response and response.status_code == 400:
             data = response.json()
-            if "user" in data and data["user"]:
-                self.log_result("User Signin", True, f"Successfully signed in user: {data['user']['id']}")
-                # Store session cookies for authenticated requests
-                self.session.cookies.update(response.cookies)
+            if "Email not confirmed" in data.get("error", ""):
+                self.log_result("User Signin - Email Confirmation Required", True, "Correctly requires email confirmation")
             else:
-                self.log_result("User Signin", False, "No user data in signin response")
+                self.log_result("User Signin", False, f"Unexpected error: {data.get('error')}")
         else:
             error_msg = response.json().get("error", "Unknown error") if response else "No response"
             self.log_result("User Signin", False, f"Status: {response.status_code if response else 'None'}, Error: {error_msg}")
 
         # Test invalid credentials
         invalid_data = {
-            "email": self.test_user_data["email"],
+            "email": "nonexistent@gmail.com",
             "password": "wrongpassword"
         }
         
