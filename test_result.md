@@ -264,14 +264,15 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Supabase Authentication Setup"
-    - "User Registration and Profile Creation" 
-    - "User Profile Management"
+    - "Database Schema Creation"
+  stuck_tasks:
+    - "User Registration and Profile Creation"
+    - "User Profile Management" 
     - "Link CRUD Operations"
     - "Public Profile API"
-  stuck_tasks: []
-  test_all: true
-  test_priority: "high_first"
+    - "Link Click Tracking"
+  test_all: false
+  test_priority: "stuck_first"
 
 agent_communication:
   - agent: "main"
