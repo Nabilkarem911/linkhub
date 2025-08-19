@@ -134,6 +134,9 @@ backend:
       - working: false
         agent: "testing"
         comment: "CRITICAL: Profile creation fails with 'Could not find the table public.profiles in the schema cache'. User signup works but profile creation in custom table fails. Database schema missing in Supabase."
+      - working: false
+        agent: "testing"
+        comment: "PROGRESS: Database schema now exists! User signup creates users successfully (HTTP 200). However, profile creation fails due to RLS policy violation: 'new row violates row-level security policy for table profiles'. Need to configure Supabase RLS policies to allow authenticated users to create/manage their profiles."
 
   - task: "User Profile Management"
     implemented: true
