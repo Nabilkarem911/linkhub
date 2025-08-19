@@ -399,25 +399,28 @@ class LinkInBioTester:
         """Test CORS headers are present"""
         print("\n=== Testing CORS Headers ===")
         
-        # Test OPTIONS request
-        response = self.make_request("OPTIONS", "/auth/signin")
-        
-        if response and response.status_code == 200:
-            headers = response.headers
-            cors_headers = [
-                "Access-Control-Allow-Origin",
-                "Access-Control-Allow-Methods", 
-                "Access-Control-Allow-Headers"
-            ]
+        # Test OPTIONS request using requests.options
+        try:
+            response = requests.options(f"{API_BASE}/auth/signin", timeout=10)
             
-            missing_headers = [h for h in cors_headers if h not in headers]
-            
-            if not missing_headers:
-                self.log_result("CORS Headers", True, "All required CORS headers present")
+            if response and response.status_code == 200:
+                headers = response.headers
+                cors_headers = [
+                    "Access-Control-Allow-Origin",
+                    "Access-Control-Allow-Methods", 
+                    "Access-Control-Allow-Headers"
+                ]
+                
+                missing_headers = [h for h in cors_headers if h not in headers]
+                
+                if not missing_headers:
+                    self.log_result("CORS Headers", True, "All required CORS headers present")
+                else:
+                    self.log_result("CORS Headers", False, f"Missing headers: {missing_headers}")
             else:
-                self.log_result("CORS Headers", False, f"Missing headers: {missing_headers}")
-        else:
-            self.log_result("CORS Headers", False, f"OPTIONS request failed: {response.status_code if response else 'None'}")
+                self.log_result("CORS Headers", False, f"OPTIONS request failed: {response.status_code if response else 'None'}")
+        except Exception as e:
+            self.log_result("CORS Headers", False, f"OPTIONS request error: {str(e)}")
 
     def test_signout(self):
         """Test user signout"""
