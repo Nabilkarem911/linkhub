@@ -152,6 +152,9 @@ backend:
       - working: false
         agent: "testing"
         comment: "CRITICAL: All profile endpoints return 401 Unauthorized due to missing 'profiles' table in Supabase. Authentication protection is working correctly, but profile operations fail due to missing database schema."
+      - working: false
+        agent: "testing"
+        comment: "PROGRESS: Database schema exists! Authentication protection works correctly (returns 401 for unauthenticated requests). Profile endpoints are properly protected but cannot be fully tested until RLS policies allow profile creation during signup."
 
   - task: "Link CRUD Operations"
     implemented: true
