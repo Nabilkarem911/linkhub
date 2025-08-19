@@ -258,3 +258,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Completed initial implementation of Link-in-Bio platform with Supabase integration. Need comprehensive backend testing of auth system, profile management, link CRUD operations, and public profile API. All Supabase credentials are configured in .env file."
+  - agent: "testing"
+    message: "CRITICAL ISSUE FOUND: Supabase database tables 'profiles' and 'links' do not exist. Backend code is implemented correctly but fails because required database schema is missing. Supabase auth works (signup/signout), but all profile and link operations fail with 'Could not find the table public.profiles in the schema cache' error. Database schema must be created in Supabase dashboard before backend can function properly."
