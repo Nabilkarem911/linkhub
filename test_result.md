@@ -279,12 +279,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Database Schema Creation"
+    - "Supabase RLS Policy Configuration"
   stuck_tasks:
     - "User Registration and Profile Creation"
     - "User Profile Management" 
     - "Link CRUD Operations"
-    - "Public Profile API"
     - "Link Click Tracking"
   test_all: false
   test_priority: "stuck_first"
